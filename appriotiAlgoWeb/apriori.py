@@ -90,7 +90,7 @@ def main():
     result_format = "("+"".join(formatted_itemsets) +")"
     return render_template{
     'result.html',
-    minimal_support=min_support,
+    minimal_support=minimal_support,
     execution_time=f"(execution_time.2f} seconds",
     total_count= total_count,
     result=result_string
