@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apriori Results</title>
+</head>
+<body>
+    <h1>Apriori Algorithm Results</h1>
+    
+    <div class="results">
+        <p><strong>Minimal Support:</strong> {{ minimal_support }}</p>
+        <p><strong>Total Running Time:</strong> {{ execution_time }}</p>
+        <p><strong>Total Items:</strong> {{ total_count }}</p>
+        
+        <h3>Frequent Itemsets:</h3>
+        <p>{{ result }}</p>
+    </div>
+    
+    <a href="/">Back to Home</a>
+</body>
+</html>
