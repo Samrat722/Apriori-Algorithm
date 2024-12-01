@@ -91,7 +91,7 @@ def main():
     return render_template(
     'result.html',
     minimal_support = min_support,
-    execution_time=f"{execution_time.2f} seconds",
+    execution_time=f"{execution_time:.2f} seconds",
     total_count= total_count,
     result=result_string
     )  
