@@ -7,7 +7,7 @@ from flask import Flask, request, render_template
 from collections import defaultdict, Counter
 from itertools import combinations
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 def load_transactions(file_name):
     transactions = []
