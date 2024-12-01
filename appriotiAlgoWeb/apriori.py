@@ -2,8 +2,12 @@ import csv
 import sys
 import argparse
 import time
+import io
+from flask import Flask, request, render_template
 from collections import defaultdict, Counter
 from itertools import combinations
+
+app = Flask(_name_)
 
 def load_transactions(file_name):
     transactions = []
@@ -62,6 +66,10 @@ def get_maximal_frequent_itemsets(frequent_itemsets):
             maximal.append(itemset)
     return maximal
 
+@app.route('/')
+def index()
+return render_template('index.html')
+@app.route('/main.csv', methods=['POST'])
 def main():
     parser = argparse.ArgumentParser(description='Apriori Algorithm Implementation')
     parser.add_argument('-i', '--input', required=True, help='Input CSV file')
@@ -73,14 +81,22 @@ def main():
     frequent_itemsets = apriori(transactions, min_support)
     maximal_frequent_itemsets = get_maximal_frequent_itemsets(frequent_itemsets)
     maximal_frequent_itemsets.sort(key=lambda x: (len(x), x))
+    total_count = len(maximal_frequent_itemsets)
     print(f"Input file: {args.input}")
     print(f"Minimal support: {min_support}")
     print("{", end="")
     formatted_itemsets = [f"{{{','.join(map(str, itemset))}}}" for itemset in maximal_frequent_itemsets]
-    print(",".join(formatted_itemsets), end="")
-    print("}")
-    print(f"\nEnd - total items: {len(maximal_frequent_itemsets)}")
-    print(f"Total running time: {time.time() - start_time:.6f}")
+
+    result_format=("+".join(formatted_itemsets) +")"
+    return render_template{
+    'result.html',
+    minimal_support=min_support,
+    execution_time=f"(execution_time.2f} seconds",
+    total_count= total_count,
+    result=result_string
+}
+  
 
 if __name__ == '__main__':
     main()
+app.run(host="0.0.0.0", port=5000)
