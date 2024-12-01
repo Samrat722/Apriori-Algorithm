@@ -9,13 +9,13 @@ from itertools import combinations
 
 app = Flask(__name__)
 
-def load_transactions(file_name):
-    transactions = []
-    with open(file_name, 'r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            transactions.append(set(row))
-    return transactions
+# def load_transactions(file_name):
+#     transactions = []
+#     with open(file_name, 'r') as file:
+#         reader = csv.reader(file)
+#         for row in reader:
+#             transactions.append(set(row))
+#     return transactions
 
 def get_frequent_1_itemsets(transactions, min_support):
     item_counts = Counter()
@@ -71,20 +71,25 @@ def index():
     return render_template('index.html')
 @app.route('/main.csv', methods=['POST'])
 def main():
-    parser = argparse.ArgumentParser(description='Apriori Algorithm Implementation')
-    parser.add_argument('-i', '--input', required=True, help='Input CSV file')
-    parser.add_argument('-m', '--min_support', type=int, required=True, help='Minimum support value')
-    args = parser.parse_args()
-    start_time = time.time()
-    transactions = load_transactions(args.input)
-    min_support = int(args.min_support)
+    # parser = argparse.ArgumentParser(description='Apriori Algorithm Implementation')
+    # parser.add_argument('-i', '--input', required=True, help='Input CSV file')
+    # parser.add_argument('-m', '--min_support', type=int, required=True, help='Minimum support value')
+    # args = parser.parse_args()
+    file = request.files['file']
+    # transactions = load_transactions(args.input)
+    min_support = int(request.form['min_support']
+    stream = io.StringIO(file.tream.read().decode("UTF8"), newline=None)
+    transactions =[set(row) for row in csv.reader(stream)]
+    start_time = time.time() 
     frequent_itemsets = apriori(transactions, min_support)
+    end_time = time.time()
+    execution_time = end_time - start_time
     maximal_frequent_itemsets = get_maximal_frequent_itemsets(frequent_itemsets)
     maximal_frequent_itemsets.sort(key=lambda x: (len(x), x))
     total_count = len(maximal_frequent_itemsets)
-    print(f"Input file: {args.input}")
-    print(f"Minimal support: {min_support}")
-    print("{", end="")
+    # print(f"Input file: {args.input}")
+    # print(f"Minimal support: {min_support}")
+    # print("{", end="")
     formatted_itemsets = [f"{{{','.join(map(str, itemset))}}}" for itemset in maximal_frequent_itemsets]
 
     result_format = "("+"".join(formatted_itemsets) +")"
