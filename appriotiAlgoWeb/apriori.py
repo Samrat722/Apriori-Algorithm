@@ -77,7 +77,7 @@ def main():
     args = parser.parse_args()
     start_time = time.time()
     transactions = load_transactions(args.input)
-    min_support = args.min_support
+    min_support = int(args.min_support)
     frequent_itemsets = apriori(transactions, min_support)
     maximal_frequent_itemsets = get_maximal_frequent_itemsets(frequent_itemsets)
     maximal_frequent_itemsets.sort(key=lambda x: (len(x), x))
@@ -88,14 +88,13 @@ def main():
     formatted_itemsets = [f"{{{','.join(map(str, itemset))}}}" for itemset in maximal_frequent_itemsets]
 
     result_format = "("+"".join(formatted_itemsets) +")"
-    return render_template{
+    return render_template(
     'result.html',
     minimal_support = min_support,
     execution_time=f"(execution_time.2f} seconds",
     total_count= total_count,
     result=result_string
-}
-  
+    )  
 
 if __name__ == '__main__':
     main()
