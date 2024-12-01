@@ -87,7 +87,7 @@ def main():
     print("{", end="")
     formatted_itemsets = [f"{{{','.join(map(str, itemset))}}}" for itemset in maximal_frequent_itemsets]
 
-    result_format=("+".join(formatted_itemsets) +")"
+    result_format = "("+"".join(formatted_itemsets) +")"
     return render_template{
     'result.html',
     minimal_support=min_support,
