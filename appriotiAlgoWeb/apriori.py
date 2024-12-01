@@ -68,7 +68,7 @@ def get_maximal_frequent_itemsets(frequent_itemsets):
 
 @app.route('/')
 def index():
-return render_template('index.html')
+    return render_template('index.html')
 @app.route('/main.csv', methods=['POST'])
 def main():
     parser = argparse.ArgumentParser(description='Apriori Algorithm Implementation')
