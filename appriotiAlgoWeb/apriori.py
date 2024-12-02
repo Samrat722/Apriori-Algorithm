@@ -5,7 +5,7 @@ import csv
 import io
 import time
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 def get_frequent_1_itemsets(transactions, min_support):
     item_counts = Counter()
