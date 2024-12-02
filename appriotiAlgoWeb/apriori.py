@@ -77,7 +77,7 @@ def main():
     # args = parser.parse_args()
     file = request.files['file']
     # transactions = load_transactions(args.input)
-    min_support = int(request.form['min_support']
+    min_support = int(request.form['min_support'])
     stream = io.StringIO(file.tream.read().decode("UTF8"), newline=None)
     transactions =[set(row) for row in csv.reader(stream)]
     start_time = time.time() 
