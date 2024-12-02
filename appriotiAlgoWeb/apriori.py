@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_Templates
+from flask import Flask, request, jsonify, render_template
 from itertools import combinations, chain
 from collections import defaultdict,Counter
 import csv
@@ -60,7 +60,7 @@ def get_maximal_frequent_itemsets(frequent_itemsets):
 
 @app.route('/')
 def index():
-    return render_Templates('index.html')
+    return render_template('index.html')
 
 @app.route('/process_csv', methods=['POST'])
 def process_csv():
@@ -81,7 +81,7 @@ def process_csv():
     formatted_output = [f"{{{','.join(map(str,sorted(itemset))).strip()}}}" for itemset in maximal_frequent_itemsets]
     result_string = "{" + "".join(formatted_output) + "}"
 
-    return render_Templates(
+    return render_template(
         'result.html', 
         minimal_support=min_support,
         execution_time=f"{execution_time:.2f} seconds",
