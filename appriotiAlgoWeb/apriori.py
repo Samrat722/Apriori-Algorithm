@@ -81,7 +81,7 @@ def process_csv():
     formatted_output = [f"{{{','.join(map(str,sorted(itemset))).strip()}}}" for itemset in maximal_frequent_itemsets]
     result_string = "{" + "".join(formatted_output) + "}"
 
-    return render_template(
+    return render_Templates(
         'result.html', 
         minimal_support=min_support,
         execution_time=f"{execution_time:.2f} seconds",
