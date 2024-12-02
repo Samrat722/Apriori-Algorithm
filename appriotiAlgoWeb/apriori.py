@@ -60,7 +60,7 @@ def get_maximal_frequent_itemsets(frequent_itemsets):
 
 @app.route('/')
 def index():
-    return render_Template('index.html')
+    return render_Templates('index.html')
 
 @app.route('/process_csv', methods=['POST'])
 def process_csv():
